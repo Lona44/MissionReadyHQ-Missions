@@ -1,5 +1,5 @@
 ![Walkthrough](assets/longgif.gif)
-# Mac-Style Desktop (Mission 01)
+# Mission 01: Mac-Style Desktop
 
 Welcome to the codebase for my Mission 01 Assignment: a fun little interactive, Mac-inspired desktop interface built with **HTML** and **CSS** (plus a sprinkle of JavaScript). This project mimics the feel of macOS with a login screen, desktop icons, a dock with hover effects, and multiple pop-up app windows, all running in the browser.
 
