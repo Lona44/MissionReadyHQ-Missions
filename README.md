@@ -7,7 +7,7 @@ Each folder is named using the format: `MissionReadyHQ-Mission0X`.
 
 ## 📂 Contents
 
-- `MissionReadyHQ-Mission01/` — Mac-style desktop interface (HTML/CSS)
+- `MissionReadyHQ-Mission01/` — [Mac-style desktop interface (HTML/CSS)](https://github.com/Lona44/MissionReadyHQ-Missions/tree/main/MissionReadyHQ-Mission01)
 - `MissionReadyHQ-Mission02/` 
 - `MissionReadyHQ-Mission03/`
 - `MissionReadyHQ-Mission04/`
