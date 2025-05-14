@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Mac-style Desktop</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+
+  <!-- ====================================
+      Section: Body
+  =================================== -->
+  <body>
+
+    <div id="app-shell">
+
+      <!-- Login Screen Toggle -->
+      <input type="checkbox" id="unlock" hidden />
+
+      <!-- Fake Terminal (Label) Toggle -->
+      <input type="checkbox" id="open-terminal" hidden />
+
+
+      <!-- ====================================
+          Section: Login Screen
+      =================================== -->
+      <!-- Login Screen -->
+      <div id="login-screen">
+        <div class="login-box">
+          <img src="./assets/miles.jpg" alt="User Avatar" class="avatar" />
+          <h1>n0tPet3rP@rker</h1>
+          
+          <!-- A bit of JS to handle the login form -->
+          <form class="login-form" onsubmit="
+            event.preventDefault(); // Prevent form submission (default behavior is to refresh the page)
+            const password = document.getElementById('real-password').value;
+            const hint = document.getElementById('password-hint');
+            const box = document.querySelector('.login-box'); // We'll use this to shake the box
+            let fails = parseInt(box.getAttribute('data-fails') || '0'); // Get the number of failed attempts (or 0 if not set)
+            
+            if (password === 'milesmorales') {
+              document.getElementById('unlock').checked = true;
+            } else {
+              hint.style.display = 'block';
+              hint.style.opacity = '1';
+              fails += 1;
+              box.setAttribute('data-fails', fails);
+              if (fails >= 2) {                       // A visual to show the user that they have failed to enter the password again
+                hint.classList.add('flash');
+                box.classList.remove('shake');
+                void box.offsetWidth;
+                box.classList.add('shake');
+                setTimeout(() => {
+                  hint.classList.remove('flash');
+                }, 1000); // Remove flash after 1 second
+              }
+            }
+          ">
+
+            <input type="password" id="real-password" placeholder="Password" required />  <!-- Password input from user-->
+            <button type="submit" class="login-button">Log In</button>                    
+            <p id="password-hint" class="hint" style="display: none;">                    <!-- Hint (hidden untl first failed password )-->
+              Hint: Main Spiderverse character’s name
+            </p>
+          </form>
+
+        </div>
+      </div>
+
+
+      <!-- ====================================
+          Section: Top Menu Bar
+      =================================== -->
+      <!-- Top Menu Bar -->
+      <div class="menu-bar">
+        <span class="menu-left">
+          <span data-menu="
+About This Mac
+System Preferences
+Shut Down…"></span>
+          <span data-menu="
+New Finder Window
+Close Window">Finder</span>
+          <span data-menu="
+Undo
+Redo
+Cut
+Copy
+Paste">File</span>
+          <span data-menu="
+Edit Text
+Find
+Select All">Edit</span>
+          <span data-menu="
+Show Sidebar
+Sort By
+Clean Up">View</span>
+          <span data-menu="
+Go to Folder
+Recents
+Downloads">Go</span>
+          <span data-menu="
+Minimize
+Zoom
+Bring All to Front">Window</span>
+          <span data-menu="
+Help Center
+Search">Help</span>
+        </span>
+        <span class="menu-right">Wed 11:41 AM 🔋98%</span>
+      </div>
+
+
+      <!-- ====================================
+          Section: Desktop Area (Icons & Windows)
+      =================================== -->
+
+      <!-- Hidden checkbox to Email Contact form -->
+      <input type="checkbox" id="toggle-form" hidden />
+
+      <main class="desktop-area">
+
+        <!-- -- Desktop Icons -- -->
+        <div class="desktop-icons">
+          <input type="checkbox" id="open-documents" hidden />
+          <label for="open-documents" class="icon" style="top: 100px; left: 40px;"> <!-- Some inline styling -->
+            <img src="./assets/folder.png" alt="Folder" />
+            <p>Documents</p>
+          </label>
+
+          <div class="documents-window">
+            <div class="mac-header">
+              <span class="red"></span>
+              <span class="yellow"></span>
+              <span class="green"></span>
+              <label for="open-documents" class="close-button">&times;</label>
+            </div>
+            <div class="documents-content">
+              <p>📄 multiverse-map.txt</p>
+              <p>📁 Secret_Lair_Photos</p>
+              <p>📄 uncle-aaron-last-words.md</p>
+              <p>📄 spider-training-schedule.pdf</p>
+              <p>📄 glitch-diary.docx</p>
+              <p>📁 Gwen_Visits_2025</p>
+            </div>
+          </div>
+        
+          <input type="checkbox" id="open-resume" hidden />
+          <label for="open-resume" class="icon" style="top: 200px; left: 40px;">
+            <img src="./assets/file.png" alt="Resume PDF" />
+            <p>Resume.pdf</p>
+          </label>
+
+          <input type="checkbox" id="open-readme" hidden />
+          <label for="open-readme" class="icon" style="top: 300px; left: 40px;">
+            <img src="./assets/txt.png" alt="README.txt" />
+            <p>README.txt</p>
+          </label>
+
+          <div class="readme-window">
+            <div class="mac-header">
+              <span class="red"></span>
+              <span class="yellow"></span>
+              <span class="green"></span>
+              <label for="open-readme" class="close-button">&times;</label>
+            </div>
+            <div class="readme-content">
+              <p><strong>This Assignment:</strong></p>
+              <p>This project was built as part of Mission Ready HQ’s Full Stack Developer programme. The brief was to create a one-page personal website using HTML and CSS to demonstrate knowledge of key elements: layout, interactivity, and design principles.</p>
+              <p>I chose to reimagine a macOS desktop, complete with a login screen, interactive dock, contact form, and themed desktop elements, all styled with a dash of Spiderverse personality (my nephew loves Miles Morales ❤️).</p>  
+              <br />
+              <p>If you want to get in touch, just click the <strong>Messages</strong> icon at the bottom of the screen in the dock.</p>
+              <p>It’ll open up a contact form. Have fun!</p>
+            </div>
+          </div>
+
+          <div class="resume-preview">
+            <div class="mac-header">
+              <span class="red"></span>
+              <span class="yellow"></span>
+              <span class="green"></span>
+              <label for="open-resume" class="close-button">&times;</label>
+            </div>
+            <div class="resume-content">
+              <img src="./assets/gif.gif" alt="Miles Morales Profile" class="resume-avatar" />
+              <h3>Miles Morales Resume</h3>
+              <p><strong>Name:</strong> Miles Morales</p>
+              <p><strong>Alias:</strong> Spider-Man (Earth-1610)</p>
+              <p><strong>Title:</strong> Aspiring Full Stack Developer / Freelance Universe Saver</p>
+
+              <p><strong>Skills:</strong></p>
+              <ul>
+                <li>Web-Slinging with CSS Grid Precision</li>
+                <li>Stealth Mode using Tailwind Classes</li>
+                <li>Venom Strike™ API integration</li>
+                <li>React + Node.js + Multiversal Sync</li>
+                <li>MongoDB (Multiverse Object Notation for Global Operations)</li>
+              </ul>
+
+              <p><strong>Experience:</strong></p>
+              <ul>
+                <li>Internship: Daily Bugle Web Developer (literally)</li>
+                <li>Open Source Contributor: Spider-Verse.js</li>
+                <li>Bug Fixing (literal and figurative) in high-risk environments</li>
+              </ul>
+
+              <p><strong>Education:</strong> Brooklyn Visions Academy, Mission Ready HQ (Full Stack Developer Program)</p>
+              <p><strong>Hobbies:</strong> Graffiti art, beat-making, debugging reality</p>
+
+              <p><strong>About Me:</strong></p>
+              <p>Hi! I’m Miles! Part-time student, full-time Spider-Man. When I’m not fighting multidimensional anomalies, I’m learning HTML, CSS, and JavaScript in pursuit of becoming a Mission Ready certified Full Stack Developer.</p>
+              <p>I believe great responsibility comes with great Git commits. Whether it’s slinging webs or slinging divs, I aim to keep my code and my city safe.</p>
+
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ====================================
+            Section: Trash Can & Trash Window
+        =================================== -->
+        <!-- Trash Can -->
+        <input type="checkbox" id="open-trash" hidden />
+        <label for="open-trash">
+          <img src="./assets/bin.png" alt="Trash" class="trash" />
+        </label>
+
+        <div class="trash-window">
+          <div class="mac-header">
+            <span class="red"></span>
+            <span class="yellow"></span>
+            <span class="green"></span>
+            <label for="open-trash" class="close-button">&times;</label>
+          </div>
+          <div class="trash-content">
+            <p>🗑️ deleted_spider_memes.png</p>
+            <p>🗑️ glitchy-id-mask.js</p>
+            <p>🗑️ uncle-aaron-voicemail.mp3</p>
+            <p>🗑️ failed-web-shooter.proto</p>
+          </div>
+        </div>
+
+
+        <!-- ====================================
+            Section: Terminal Window
+        =================================== -->
+        <div class="terminal-window">
+          <div class="mac-header">
+            <span class="red"></span>
+            <span class="yellow"></span>
+            <span class="green"></span>
+            <label for="open-terminal" class="close-button">&times;</label>
+          </div>
+          <div class="terminal-content">
+            <pre>
+          ➜ ~ echo "Hello Multiverse"
+          Hello Multiverse
+
+          ➜ ~ ls ~/Desktop
+          Documents/ Resume.pdf   README.txt   Trash/
+
+          ➜ ~ ssh miles@earth-1610.net
+          Connecting to earth-1610.net...
+          Connection established.
+          Welcome, Miles.
+            </pre>
+          </div>
+        </div>
+
+
+        <!-- ====================================
+            Section: Dock
+        =================================== -->
+        <!-- Dock -->
+        <aside class="dock-area">
+          <div class="dock">
+            <div class="dock-item">
+              <a href="https://vscode.dev/" target="_blank" class="dock-button">
+                <img src="./assets/visual-studio.png" alt="VS Code" />
+              </a>
+            </div>
+            <div class="dock-item">
+              <a href="https://www.google.com" target="_blank">
+                <img src="./assets/chrome.png" alt="Chrome" />
+              </a>
+            </div>
+            <div class="dock-item">
+              <a href="https://open.spotify.com/album/1bwbZJ6khPJyVpOaqgKsoZ" target="_blank">
+                <img src="./assets/spotify.png" alt="Spotify" />
+              </a>
+            </div>
+            <div class="dock-item">
+              <a href="https://apps.apple.com/" target="_blank">
+                <img src="./assets/app-store.png" alt="App Store" />
+              </a>
+            </div>
+            <div class="dock-item">
+              <label for="toggle-form" class="dock-button">
+                <img src="./assets/messages.png" alt="Messages" />
+              </label>
+            </div>
+            <div class="dock-item">
+              <label for="open-terminal" class="dock-button">
+                <img src="./assets/terminal.webp" alt="iTerm" />
+              </label>
+            </div>
+            <div class="dock-item">
+              <a href="https://support.apple.com/en-nz/guide/mac-help/mchlp2803/mac" target="_blank">
+                <img src="./assets/finder.png" alt="Finder" />
+              </a>
+            </div>
+          </div>
+        </aside>
+
+
+        <!-- ====================================
+            Section: Contact Form Popup
+        =================================== -->
+        <!-- Contact Form Popup -->
+        <div class="chat-popup">
+        <div class="chat-header">
+        <div class="mac-header">
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        </div>
+        <label for="toggle-form" class="close-button">&times;</label>
+        </div>
+          <form id="demo-form" onsubmit="event.preventDefault(); document.getElementById('thank-you').style.display = 'block';">
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" />
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Hey, just dropping a line…"></textarea>
+
+            <button type="submit" class="send-button">Send</button>
+
+            <p id="thank-you" class="thank-you">
+              ✅ Thanks! Your message was received.
+            </p>
+          </form>
+        </div>
+      </main>
+
+    </div> <!-- End of app-shell -->
+  </body>
+
+</html>

@@ -1,0 +1,677 @@
+/* =========================================
+   Mission 01 MacOS Dock CSS
+   Table of Contents
+   =========================================
+   1. Base Layout
+   2. Login Screen
+   3. Top Menu Bar
+   4. Desktop Icons
+   5. Trash Icon
+   6. Intro Text
+   7. Dock
+   8. Contact Form Popup
+   9. App Windows (Documents, Resume, Trash, Readme, Terminal)
+  10. Animations & Utilities
+========================================= */
+
+/* =========================================
+   1. Base Layout
+   ========================================= */
+body {
+  margin: 0;
+  background: url('./assets/macos-wallpaper.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+  overflow: hidden;
+}
+
+
+/* =========================================
+   2. Login Screen
+   ========================================= */
+#login-screen {
+  position: fixed;
+  inset: 0;
+  background: url('./assets/macos-wallpaper.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.login-box { /* Responsible for the glassy box effect */
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(7px);
+  padding: 40px 60px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.login-box .avatar {
+  width: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.login-box input {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.hint {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+  text-align: center;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  transition: color 0.1s ease;
+  animation: fadeIn 0.4s ease-out;
+  white-space: normal;
+  word-wrap: break-word;
+  width: 100%;
+  display: block;
+  height: auto;
+  line-height: 1.4;
+  padding: 6px 12px;
+  box-sizing: border-box;
+}
+
+.login-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: rgba(0, 122, 255, 0.8);
+  border-radius: 12px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: none;
+  box-shadow: none;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: rgba(0, 122, 255, 1);
+  box-shadow: none;
+}
+
+/* Hide login screen after toggle (aka successful sign in) */
+#unlock:checked ~ #login-screen {
+  display: none; /*completely removes that element from the layout and render tree */
+}
+
+/* =========================================
+   3. Top Menu Bar
+   ========================================= */
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Fake dropdown menu styles for menu bar */
+.menu-left span {
+  margin-right: 16px;
+  cursor: default;
+  position: relative;
+}
+
+.menu-left span:hover::after { /* pseudo-elements FTW */
+  content: attr(data-menu);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #222;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: pre;
+  display: inline-block;
+  z-index: 1000;
+}
+
+
+/* =========================================
+   4. Desktop Icons
+   ========================================= */
+.desktop-icons {
+  position: relative;
+  z-index: 0;
+}
+
+.icon {
+  position: absolute;
+  width: 60px;
+  text-align: center;
+  color: white;
+  font-size: 0.8rem;
+}
+
+.icon img {
+  width: 48px;
+  height: auto;
+}
+
+
+/* =========================================
+   5. Trash Icon
+   ========================================= */
+.trash {
+  position: fixed;
+  bottom: 100px;
+  right: 40px;
+  width: 64px;
+  height: auto;
+}
+
+
+/* =========================================
+   6. Intro Text
+   ========================================= */
+.intro {
+  text-align: center;
+  margin-top: 60px;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+
+/* =========================================
+   7. Dock
+   ========================================= */
+.dock-area {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 999;
+}
+
+.dock {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 10px 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+  width: fit-content;
+}
+
+.dock-area:hover .dock {
+  bottom: 20px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* Dock item hover scaling */
+.dock-item {
+  display: inline-block;
+}
+
+.dock-item img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.dock-item:hover img {
+  transform: scale(1.9) translateY(-15px);
+  z-index: 3;
+}
+
+.dock-item:hover + .dock-item img {
+  transform: scale(1.2) translateY(-7px);
+  z-index: 2;
+}
+
+.dock-item:hover + .dock-item + .dock-item img {
+  transform: scale(1.1) translateY(-3px);
+  z-index: 1;
+}
+
+/* scale icons immediately to the left of the hovered item */
+/* Might not work in all browsers */
+.dock-item:has(+ .dock-item:hover) img {
+  transform: scale(1.2) translateY(-7px);
+  z-index: 2;
+}
+
+/* scale the second icon to the left */
+/* Might not work in all browsers */
+.dock-item:has(+ .dock-item + .dock-item:hover) img {
+  transform: scale(1.1) translateY(-3px);
+  z-index: 1;
+}
+
+
+/* =========================================
+   8. Contact Form Popup
+   ========================================= */
+.chat-popup {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  padding: 20px;
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+}
+
+#toggle-form:checked ~ main .chat-popup {
+  display: flex;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.mac-header span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.red { background: #ff5f57; }
+.yellow { background: #ffbd2e; }
+.green { background: #28c840; }
+
+.close-button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.chat-popup label {
+  font-size: 0.85rem;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.chat-popup input,
+.chat-popup textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  background-color: #f5f5f7;
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin-bottom: 12px;
+  resize: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-popup input:focus,
+.chat-popup textarea:focus {
+  outline: none;
+  border-color: rgba(0, 122, 255, 0.6);
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+.send-button {
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #005fc1;
+}
+
+.thank-you {
+  display: none;
+  font-size: 0.9rem;
+  color: green;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+/* =========================================
+   9. App Windows (Documents, Resume, Trash, Readme, Terminal)
+   ========================================= */
+/* App Window: Documents & Resume */
+.resume-preview,
+.documents-window {
+  position: fixed;
+  top: 60px;
+  left: 20%;
+  transform: none;
+  width: 60%;
+  height: 70%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  display: none;
+  flex-direction: column;
+  z-index: 1500;
+  overflow: hidden;
+  padding: 16px;
+}
+
+#open-resume:checked ~ .resume-preview,
+#open-documents:checked ~ .documents-window {
+  display: flex;
+}
+
+.resume-content,
+.documents-content {
+  padding: 16px;
+  overflow-y: auto;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 0.9rem;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.documents-content p {
+  margin: 6px 0;
+}
+
+/* New rule for resume avatar */
+.resume-avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* App Window: Trash Bin */
+.trash-window {
+  position: fixed;
+  top: 60px;
+  left: 25%;
+  transform: none;
+  width: 50%;
+  height: 60%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  display: none;
+  flex-direction: column;
+  z-index: 1500;
+  overflow: hidden;
+  padding: 16px;
+}
+
+#open-trash:checked ~ .trash-window {
+  display: flex;
+}
+
+.trash-content {
+  padding: 16px;
+  overflow-y: auto;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 0.9rem;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.trash-content p {
+  margin: 6px 0;
+}
+
+/* App Window: README */
+.readme-window {
+  position: fixed;
+  top: 60px;
+  left: 25%;
+  transform: none;
+  width: 50%;
+  height: 40%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  display: none;
+  flex-direction: column;
+  z-index: 1500;
+  overflow: hidden;
+  padding: 16px;
+}
+
+#open-readme:checked ~ .readme-window {
+  display: flex;
+}
+
+.readme-content {
+  padding: 16px;
+  overflow-y: auto;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 0.9rem;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.readme-content p {
+  margin: 6px 0;
+}
+
+/* App Window: Terminal */
+.terminal-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 50%;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  display: none;
+  flex-direction: column;
+  z-index: 1500;
+  overflow: hidden;
+  font-family: 'Menlo', 'Courier New', monospace;
+}
+
+.terminal-content {
+  padding: 0px;
+  overflow-y: auto;
+  font-size: 0.7rem;
+  white-space: pre-wrap;
+  flex: 1;
+  background: #1e1e1e;
+  color: #d4d4d4;
+}
+
+.terminal-content::after {
+  content: "\2588"; /* Unicode character for a block that we animate to blink */
+  display: inline-block;
+  animation: blink 1s steps(1) infinite;
+  color: #00ffcc;
+}
+
+/* Section: Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   10. Animations & Utilities
+   ========================================= */
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.login-box.shake {
+  animation: shake 0.4s ease;
+}
+
+.hint.flash {
+  color: #ff8888 !important;
+  transition: color 1.2s ease;
+}
+/* -------------------------------
+   Resume & Documents Preview Windows
+---------------------------------- */
+
+
+.resume-content,
+.documents-content {
+  padding: 16px;
+  overflow-y: auto;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 0.9rem;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.documents-content p {
+  margin: 6px 0;
+}
+
+/* New rule for resume avatar */
+.resume-avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  float: right;
+  margin-right: 50px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* -------------------------------
+   Trash Bin Window
+---------------------------------- */
+
+#open-trash:checked ~ .trash-window {
+  display: flex;
+}
+
+.trash-content {
+  padding: 16px;
+  overflow-y: auto;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 0.9rem;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.trash-content p {
+  margin: 6px 0;
+}
+
+/* -------------------------------
+   README Window
+---------------------------------- */
+
+#open-readme:checked ~ .readme-window {
+  display: flex;
+}
+
+.readme-content {
+  padding: 16px;
+  overflow-y: auto;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 0.8rem;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.readme-content p {
+  margin: 6px 0;
+}
+
+
+#open-terminal:checked ~ main .terminal-window {
+  display: flex;
+}
+
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+
+
+@keyframes blink-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
