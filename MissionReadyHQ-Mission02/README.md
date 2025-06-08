@@ -1,3 +1,4 @@
+![Walkthrough](smaller_output.gif)
 # JavaScript Interactive Learning Playground 
 
 An engaging, interactive web application designed to teach JavaScript fundamentals through hands-on exercises and challenges. Perfect for beginners looking to learn JavaScript concepts through practical, interactive lessons.
