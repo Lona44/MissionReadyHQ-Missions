@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interactive Learning Playground</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JS logo" style="height: 48px; vertical-align: middle; margin-right: 10px;">
+              Interactive Playground
+            </h1>
+            <p>Learn by doing - complete challenges to unlock the next level!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">Progress: 0 / 5 lessons completed</p>
+            <button class="btn" id="resetProgressBtn" style="margin: 10px 0 20px 0; background: #ec7b75; color: white; border: none; padding: 8px 18px; border-radius: 5px; cursor: pointer;">
+                🔄 Reset Progress
+            </button>
+            
+            <!-- Lesson Navigation Tabs -->
+            <div class="lesson-tabs">
+                <button class="tab-btn active" onclick="navigateToLesson(1)">Lesson 1: Variables</button>
+                <button class="tab-btn" onclick="navigateToLesson(2)">Lesson 2: Functions</button>
+                <button class="tab-btn" onclick="navigateToLesson(3)">Lesson 3: DOM</button>
+                <button class="tab-btn" onclick="navigateToLesson(4)">Lesson 4: Events</button>
+                <button class="tab-btn" onclick="navigateToLesson(5)">Lesson 5: Loops</button>
+            </div>
+        </div>
+
+        <!-- Lesson 1: Variables -->
+        <div class="lesson active" id="lesson1">
+            <h2>Lesson 1: Variables - The Building Blocks</h2>
+            <p>Variables are containers that store data. Let's practice creating them!</p>
+
+            <div class="challenge-type">
+                <h3>🔧 Fill in the Missing Code</h3>
+                <p>Complete the variable declarations below:</p>
+                
+                <div class="code-template">
+                    <div>// Create variables to store information</div>
+                    <div><span class="code-blank" data-answer="let">___</span> playerName = "Brendan";</div>
+                    <div><span class="code-blank" data-answer="const">___</span> MAX_SCORE = 1000;</div>
+                    <div><span class="code-blank" data-answer="let">___</span> currentScore = <span class="code-blank" data-answer="0">___</span>;</div>
+                </div>
+
+                <div class="hint" id="hint1">
+                    <strong>Hint 1/2:</strong> Use 'let' for variables that can change, 'const' for constants that never change.
+                </div>
+                <div class="hint" id="hint1-2" style="display: none;">
+                    <strong>Hint 2/2:</strong> The last value needs to be the initial score when starting a game (hint: it's a number).
+                </div>
+                <div class="hint answer-hint" id="answer1" style="display: none;">
+                    <strong>Answer:</strong> The first blank is "let", second is "const", third is "let", and fourth is "0".
+                </div>
+
+                <div class="live-output" id="output1">
+                    Click on the red blanks and type your answers!
+                </div>
+            </div>
+
+            <div class="success-message" id="success1">
+                🎉 Excellent! You've mastered variables! Variables are the foundation of all programming.
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="hintBtn1" onclick="showNextHint(1)">Show Hint</button>
+                <button class="btn" id="checkLesson1" disabled>Check My Code</button>
+                <button class="btn" id="nextLesson1" disabled>Next Lesson →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 2: Functions -->
+        <div class="lesson" id="lesson2">
+            <h2>Lesson 2: Functions - The Machines</h2>
+            <p>Functions are reusable blocks of code that perform specific tasks.</p>
+
+            <div class="challenge-type">
+                <h3>🧩 Drag and Drop Challenge</h3>
+                <p>Drag the correct code blocks to build a working function:</p>
+                
+                <div class="hint" id="hint2">
+                    <strong>Hint 1/2:</strong> Functions need to start with a declaration, followed by the code inside, and end with a closing brace.
+                </div>
+                <div class="hint" id="hint2-2" style="display: none;">
+                    <strong>Hint 2/2:</strong> To create a working function, you need (in order): the function declaration, a return statement, and a closing brace.
+                </div>
+                <div class="hint answer-hint" id="answer2" style="display: none;">
+                    <strong>Answer:</strong> Place "function greetPlayer(playerName) {" at the top, "return "Hello, " + playerName + "!";" in the middle, and "}" at the bottom.
+                </div>
+                
+                <div class="drag-drop-area">
+                    <div class="code-blocks">
+                        <h3>📚 Available Code Blocks</h3>
+                        <div class="draggable-block" draggable="true" data-type="function-declaration">
+                            function greetPlayer(playerName) {
+                        </div>
+                        <div class="draggable-block" draggable="true" data-type="return-statement">
+                            return "Hello, " + playerName + "!";
+                        </div>
+                        <div class="draggable-block" draggable="true" data-type="closing-brace">
+                            }
+                        </div>
+                        <div class="draggable-block" draggable="true" data-type="wrong-syntax">
+                            console.log("This is wrong");
+                        </div>
+                    </div>
+                    
+                    <div class="code-blocks">
+                        <h3>🎯 Drop Zone - Build Your Function</h3>
+                        <div class="drop-zone" data-expects="function-declaration" id="dropZone1">
+                            Start building your function here
+                        </div>
+                        <div class="drop-zone" data-expects="return-statement" id="dropZone2">
+                            What should the function do?
+                        </div>
+                        <div class="drop-zone" data-expects="closing-brace" id="dropZone3">
+                            Don’t forget to close your function
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-output" id="output2">
+                    Drag code blocks to see the function come to life!
+                </div>
+            </div>
+
+            <div class="success-message" id="success2">
+                🚀 Amazing! You've built your first function! Functions help organize and reuse code.
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="hintBtn2" onclick="showNextHint(2)">Show Hint</button>
+                <button class="btn" id="testFunction">Test Function</button>
+                <button class="btn" id="nextLesson2" disabled>Next Lesson →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 3: DOM Manipulation -->
+        <div class="lesson" id="lesson3">
+            <h2>Lesson 3: DOM Manipulation - Changing the Page</h2>
+            <p>The DOM (Document Object Model) lets you change what's on the webpage!</p>
+
+            <div class="challenge-type">
+                <h3>🎯 Matching Challenge</h3>
+                <p>Match the DOM methods with their purposes:</p>
+                
+                <div class="hint" id="hint3">
+                    <strong>Hint 1/2:</strong> Match each DOM method with its corresponding purpose by looking at what the method name suggests.
+                </div>
+                <div class="hint" id="hint3-2" style="display: none;">
+                    <strong>Hint 2/2:</strong> "getElementById" finds elements by ID, "querySelector" uses CSS selectors, "textContent" changes text, and "style.color" changes colors.
+                </div>
+                <div class="hint answer-hint" id="answer3" style="display: none;">
+                    <strong>Answer:</strong> Match "document.getElementById()" with "Finds element by its ID", "document.querySelector()" with "Finds element using CSS selectors", "element.textContent" with "Changes the text inside an element", and "element.style.color" with "Changes the color of an element".
+                </div>
+                
+                <div class="matching-game">
+                    <div class="match-column">
+                        <h3>DOM Methods</h3>
+                        <div class="match-item" data-match="1">document.getElementById()</div>
+                        <div class="match-item" data-match="2">document.querySelector()</div>
+                        <div class="match-item" data-match="3">element.textContent</div>
+                        <div class="match-item" data-match="4">element.style.color</div>
+                    </div>
+                    
+                    <div class="match-column">
+                        <h3>What They Do</h3>
+                        <div class="match-item" data-match="3">Changes the text inside an element</div>
+                        <div class="match-item" data-match="1">Finds element by its ID</div>
+                        <div class="match-item" data-match="4">Changes the color of an element</div>
+                        <div class="match-item" data-match="2">Finds element using CSS selectors</div>
+                    </div>
+                </div>
+
+                <div class="live-output" id="output3">
+                    <div>Click items to match them up!</div>
+                    <div id="demoElement" style="padding: 10px; background: #333; border-radius: 5px; margin: 10px 0;">
+                        I can be changed by DOM manipulation!
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-message" id="success3">
+                🎨 Fantastic! You understand DOM manipulation! This is how JavaScript makes webpages interactive.
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="hintBtn3" onclick="showNextHint(3)">Show Hint</button>
+                <button class="btn" id="nextLesson3" disabled>Next Lesson →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 4: Events -->
+        <div class="lesson" id="lesson4">
+            <h2>Lesson 4: Events - Making Things Happen</h2>
+            <p>Events let your code respond to user actions like clicks, typing, and mouse movements!</p>
+
+            <div class="challenge-type">
+                <h3>🔧 Complete the Event Handler</h3>
+                <p>Fill in the missing parts to create a working event listener:</p>
+                
+                <div class="hint" id="hint4">
+                    <strong>Hint 1/2:</strong> To create an event listener, first find the element, then add the event listener for a specific event type.
+                </div>
+                <div class="hint" id="hint4-2" style="display: none;">
+                    <strong>Hint 2/2:</strong> The method to find an element by ID is "getElementById", the method to add an event is "addEventListener", and the most common event is "click".
+                </div>
+                <div class="hint answer-hint" id="answer4" style="display: none;">
+                    <strong>Answer:</strong> The blanks should be filled with: "getElementById", "addEventListener", "click", and "clicked".
+                </div>
+                
+                <div class="code-template">
+                    <div>// Add event listener to a button</div>
+                    <div>const button = document.<span class="code-blank" data-answer="getElementById">___</span>("myButton");</div>
+                    <div>button.<span class="code-blank" data-answer="addEventListener">___</span>("<span class="code-blank" data-answer="&quot;click&quot;">__</span>", function() {</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Button was <span class="code-blank" data-answer="clicked">___</span>!");</div>
+                    <div>});</div>
+                </div>
+
+                <div class="live-output" id="output4">
+                    <div id="eventOutput"></div>
+                </div>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <button
+                      id="demoButton"
+                      disabled
+                      onclick="updateLiveOutput('output4', ['Button was clicked!']);"
+                      style="background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; display: inline-block;"
+                    >
+                      Click me to test the event!
+                    </button>
+                </div>
+            </div>
+
+            <div class="success-message" id="success4">
+                ⚡ Incredible! You've mastered events! Events make websites interactive and responsive.
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="hintBtn4" onclick="showNextHint(4)">Show Hint</button>
+                <button class="btn" id="checkLesson4" disabled>Check Event Code</button>
+                <button class="btn" id="nextLesson4" disabled>Final Lesson →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 5: Loops -->
+        <div class="lesson" id="lesson5">
+            <h2>Lesson 5: Loops - Repeating Actions</h2>
+            <p>Loops let you repeat code multiple times efficiently!</p>
+
+            <div class="challenge-type">
+                <h3>🧩 Build a Loop</h3>
+                <p>Drag the pieces to create a working for loop:</p>
+                
+                <div class="hint" id="hint5">
+                    <strong>Hint 1/2:</strong> A for loop has three parts in its declaration: initialization, condition, and increment.
+                </div>
+                <div class="hint" id="hint5-2" style="display: none;">
+                    <strong>Hint 2/2:</strong> The proper order is: start with "for (let i = 0;", then the condition "i < 5;", then the increment "i++) {", followed by the loop body, and end with a closing brace.
+                </div>
+                <div class="hint answer-hint" id="answer5" style="display: none;">
+                    <strong>Answer:</strong> Place the blocks in this order: "for (let i = 0;", "i < 5;", "i++) {", "console.log(&quot;Count: &quot; + i);", and "}".
+                </div>
+                
+                <div class="drag-drop-area">
+                    <div class="code-blocks">
+                        <h3>📚 Loop Components</h3>
+                        <div class="draggable-block" draggable="true" data-type="for-start">
+                            for (let i = 0;
+                        </div>
+                        <div class="draggable-block" draggable="true" data-type="condition">
+                            i &lt; 5;
+                        </div>
+                        <div class="draggable-block" draggable="true" data-type="increment">
+                            i++) {
+                        </div>
+                        <div class="draggable-block" draggable="true" data-type="loop-body">
+                            console.log("Count: " + i);
+                        </div>
+                        <div class="draggable-block" draggable="true" data-type="closing-brace">
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="code-blocks">
+                        <h3>🎯 Build Your Loop</h3>
+                        <div class="drop-zone" data-expects="for-start" id="loopZone1">
+                            Begin your loop here
+                        </div>
+                        <div class="drop-zone" data-expects="condition" id="loopZone2">
+                            Add a looping condition
+                        </div>
+                        <div class="drop-zone" data-expects="increment" id="loopZone3">
+                            Specify how the loop should change
+                        </div>
+                        <div class="drop-zone" data-expects="loop-body" id="loopZone4">
+                            What should the loop do each time?
+                        </div>
+                        <div class="drop-zone" data-expects="closing-brace" id="loopZone5">
+                            Close the loop properly
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-output" id="output5">
+                    Build the loop to see it count from 0 to 4!
+                </div>
+            </div>
+
+            <div class="success-message" id="success5">
+                🔄 Nice! You've got a solid grip on loops now!
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="hintBtn5" onclick="showNextHint(5)">Show Hint</button>
+                <button class="btn" id="runLoop">Run Loop</button>
+                <button class="btn" id="completePlayground" disabled>🎓 Complete Playground!</button>
+            </div>
+        </div>
+
+        <!-- Completion Screen -->
+        <div class="lesson" id="completion">
+            <h2>🎉 Congratulations! You've Mastered JavaScript Basics!</h2>
+            <div style="text-align: center; padding: 40px;">
+                <div class="celebration-trophy" style="font-size: 4em; margin: 20px 0;">🏆</div>
+                <h3>You've Successfully Learned:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px;">
+                        <strong>✅ Variables</strong><br>
+                        let & const declarations
+                    </div>
+                    <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px;">
+                        <strong>✅ Functions</strong><br>
+                        Reusable code blocks
+                    </div>
+                    <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px;">
+                        <strong>✅ DOM Manipulation</strong><br>
+                        Changing webpage elements
+                    </div>
+                    <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px;">
+                        <strong>✅ Events</strong><br>
+                        Responding to user actions
+                    </div>
+                    <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px;">
+                        <strong>✅ Loops</strong><br>
+                        Repeating code efficiently
+                    </div>
+                </div>
+                <p style="font-size: 1.2em; margin: 20px 0;">
+                    You now have all the fundamental skills needed to build interactive websites!
+                </p>
+                <button class="btn" onclick="location.reload()">🔄 Start Over</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
